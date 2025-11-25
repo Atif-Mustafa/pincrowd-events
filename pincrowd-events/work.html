@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Work - Pincrowd Events</title>
+  <meta name="description" content="Explore our portfolio of premium events. From corporate summits to luxury weddings, see how we create unforgettable experiences.">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <div class="page-transition"></div>
+  
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">PIN<span class="text-gold">CROWD</span> EVENTS</a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="work.html" class="active">Work</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Portfolio Hero -->
+  <section class="hero" style="min-height: 60vh;">
+    <div class="container">
+      <h1 class="fade-in">Our Portfolio</h1>
+      <p class="hero-subtitle fade-in">A showcase of extraordinary events</p>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid -->
+  <section class="work-section section">
+    <div class="container">
+      <div class="filter-tags fade-in">
+        <button class="filter-tag active" data-filter="all">All</button>
+        <button class="filter-tag" data-filter="corporate">Corporate</button>
+        <button class="filter-tag" data-filter="social">Social</button>
+        <button class="filter-tag" data-filter="launches">Launches</button>
+        <button class="filter-tag" data-filter="awards">Awards</button>
+        <button class="filter-tag" data-filter="MICE">MICE</button>
+      </div>
+      <div class="work-grid">
+        <!-- Corporate Events -->
+        <div class="work-item" data-category="corporate" data-modal="portfolio1">
+          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800" alt="Tech Summit">
+          <div class="work-overlay">
+            <h4>Global Tech Summit</h4>
+            <p>Corporate | Mumbai | 2024</p>
+          </div>
+        </div>
+        <div class="work-item" data-category="corporate" data-modal="portfolio2">
+          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800" alt="Business Conference">
+          <div class="work-overlay">
+            <h4>Finance Leaders Forum</h4>
+            <p>Corporate | Dubai | 2024</p>
+          </div>
+        </div>
+        <!-- Launches -->
+        <div class="work-item" data-category="launches" data-modal="portfolio3">
+          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800" alt="Fashion Launch">
+          <div class="work-overlay">
+            <h4>Lakme Fashion Week</h4>
+            <p>Launch | Mumbai | 2024</p>
+          </div>
+        </div>
+        <div class="work-item" data-category="launches" data-modal="portfolio4">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800" alt="Auto Launch">
+          <div class="work-overlay">
+            <h4>Electric Vehicle Launch</h4>
+            <p>Launch | Istanbul | 2024</p>
+          </div>
+        </div>
+        <!-- Social -->
+        <div class="work-item" data-category="social" data-modal="portfolio5">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800" alt="Wedding">
+          <div class="work-overlay">
+            <h4>Destination Wedding</h4>
+            <p>Social | Goa | 2024</p>
+          </div>
+        </div>
+        <div class="work-item" data-category="social" data-modal="portfolio6">
+          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800" alt="Anniversary">
+          <div class="work-overlay">
+            <h4>Golden Anniversary</h4>
+            <p>Social | Mumbai | 2024</p>
+          </div>
+        </div>
+        <!-- Awards -->
+        <div class="work-item" data-category="awards" data-modal="portfolio7">
+          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800" alt="Awards Night">
+          <div class="work-overlay">
+            <h4>Excellence Awards 2024</h4>
+            <p>Awards | Geneva | 2024</p>
+          </div>
+        </div>
+        <div class="work-item" data-category="awards" data-modal="portfolio8">
+          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800" alt="Award Gala">
+          <div class="work-overlay">
+            <h4>Film Awards Gala</h4>
+            <p>Awards | Mumbai | 2024</p>
+          </div>
+        </div>
+        <!-- MICE -->
+        <div class="work-item" data-category="MICE" data-modal="portfolio9">
+          <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800" alt="MICE Event">
+          <div class="work-overlay">
+            <h4>Global Sales Meet</h4>
+            <p>MICE | Bangkok | 2024</p>
+          </div>
+        </div>
+        <div class="work-item" data-category="MICE" data-modal="portfolio10">
+          <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800" alt="International Conference">
+          <div class="work-overlay">
+            <h4>International Conference</h4>
+            <p>MICE | Dubai | 2024</p>
+          </div>
+        </div>
+        <div class="work-item" data-category="corporate" data-modal="portfolio11">
+          <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=800" alt="Pharma Event">
+          <div class="work-overlay">
+            <h4>Pharma Innovation Day</h4>
+            <p>Corporate | Mumbai | 2024</p>
+          </div>
+        </div>
+        <div class="work-item" data-category="social" data-modal="portfolio12">
+          <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800" alt="Birthday Celebration">
+          <div class="work-overlay">
+            <h4>50th Birthday Bash</h4>
+            <p>Social | Mumbai | 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Find Us</h4>
+          <p>31, 3rd Floor, Satyam Building<br>
+          Linking Road, Khar West<br>
+          Mumbai – 400052<br>
+          <a href="https://maps.google.com" target="_blank">View on Map</a></p>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <p>Phone: <a href="tel:+919773776864">+91 9773776864</a><br>
+          Email: <a href="mailto:manish@pincrowdevents.com">manish@pincrowdevents.com</a></p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">i</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Twitter">t</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Stay Up to Date</h4>
+          <p>Subscribe to our newsletter for event insights and inspiration.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email" required>
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pincrowd Events. All rights reserved. | Where Every Event Is a Memory Worth Pinning.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Portfolio Modals -->
+  <div class="modal" id="portfolio1">
+    <div class="modal-content">
+      <button class="close-modal">&times;</button>
+      <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800" alt="Tech Summit">
+      <div class="modal-body">
+        <h3>Global Tech Summit 2024</h3>
+        <p><strong>Type:</strong> Corporate Event</p>
+        <p><strong>Location:</strong> Mumbai</p>
+        <p><strong>Guests:</strong> 800+</p>
+        <p>A premier technology conference bringing together industry leaders from across the globe. We managed the complete event lifecycle from venue sourcing at Jio World Convention Centre to stage design, speaker coordination, and live streaming for 10,000+ virtual attendees.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="portfolio2">
+    <div class="modal-content">
+      <button class="close-modal">&times;</button>
+      <img src="https://images.unsplash.com/photo-1556761175-5973dc435197?w=800" alt="Finance Forum">
+      <div class="modal-body">
+        <h3>Finance Leaders Forum</h3>
+        <p><strong>Type:</strong> Corporate Event</p>
+        <p><strong>Location:</strong> Dubai</p>
+        <p><strong>Guests:</strong> 200 C-level executives</p>
+        <p>An exclusive gathering of finance industry leaders at the Burj Al Arab. The event featured roundtable discussions, networking sessions, and a gala dinner. Our team handled international travel logistics, VIP security, and a stunning LED stage installation.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

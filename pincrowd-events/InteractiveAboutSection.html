@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Stacking Cards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #f5f7f6;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 60px 20px;
+            position: relative;
+        }
+        
+        .expertise-card {
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            height: 480px;
+            overflow: hidden;
+            position: sticky;
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            background: white;
+        }
+        
+        /* Higher z-index for later cards so they appear on top when scrolling */
+        .expertise-card:nth-child(1) {
+            top: 80px;
+            z-index: 1;
+        }
+        
+        .expertise-card:nth-child(2) {
+            top: 100px;
+            z-index: 2;
+        }
+        
+        .expertise-card:nth-child(3) {
+            top: 120px;
+            z-index: 3;
+        }
+        
+        .expertise-card:nth-child(4) {
+            top: 140px;
+            z-index: 4;
+        }
+        
+        .expertise-card:nth-child(5) {
+            top: 160px;
+            z-index: 5;
+        }
+        
+        .expertise-card.active {
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 208, 141, 0.3);
+        }
+        
+        .content {
+            background: linear-gradient(135deg, #2a4a27 0%, #182916 100%);
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 24px;
+            width: 60%;
+            padding: 50px;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://www.transparenttextures.com/patterns/diagmonds.png');
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .content > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .heading {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 208, 141, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd08d;
+            font-size: 1.5rem;
+        }
+        
+        .heading h2 {
+            color: #fff;
+            font-size: 2.4rem;
+            margin-bottom: 0;
+            font-weight: 700;
+        }
+        
+        .hr {
+            background: linear-gradient(to right, #ffd08d, transparent);
+            width: 100%;
+            height: 3px;
+            border-radius: 2px;
+        }
+        
+        .body {
+            color: #f0f0f0;
+            line-height: 1.7;
+        }
+        
+        .body-text {
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            max-width: 500px;
+            font-weight: 300;
+        }
+        
+        .image {
+            width: 40%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to left, rgba(0,0,0,0.2), transparent);
+            z-index: 1;
+        }
+        
+        .image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-position: center;
+            object-fit: cover;
+            transition: transform 1.2s ease;
+        }
+        
+        .expertise-card.active .image img {
+            transform: scale(1.08);
+        }
+        
+        .body-link {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: .5rem;
+            margin-top: 1rem;
+        }
+        
+        .body-link a {
+            display: flex;
+            gap: .8rem;
+            color: #ffd08d;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 14px 28px;
+            border: 2px solid #ffd08d;
+            border-radius: 50px;
+            background: rgba(255, 208, 141, 0.1);
+            align-items: center;
+        }
+        
+        .body-link a:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 208, 141, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 208, 141, 0.2);
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .progress-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+        }
+        
+        .progress-dot::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 208, 141, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .progress-dot.active {
+            background-color: #2a4a27;
+            transform: scale(1.3);
+        }
+        
+        .progress-dot.active::after {
+            opacity: 1;
+        }
+        
+        .card-counter {
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 12px 24px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .spacer {
+            height: 100px;
+        }
+        
+        @media (max-width: 900px) {
+            .cards-container {
+                padding: 40px 20px;
+                gap: 30px;
+            }
+            
+            .expertise-card {
+                flex-direction: column;
+                position: relative;
+                top: 0 !important;
+                height: auto;
+                min-height: auto;
+                width: 95%;
+            }
+            
+            .content, .image {
+                width: 100%;
+            }
+            
+            .image {
+                height: 300px;
+                order: -1;
+            }
+            
+            .content {
+                padding: 40px 30px;
+            }
+            
+            .progress-indicator, .card-counter {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .heading h2 {
+                font-size: 2rem;
+            }
+            
+            .body-text {
+                font-size: 1rem;
+            }
+            
+            .icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-counter">01</div>
+    
+    <div class="progress-indicator">
+        <div class="progress-dot active" data-card="1"></div>
+        <div class="progress-dot" data-card="2"></div>
+        <div class="progress-dot" data-card="3"></div>
+        <div class="progress-dot" data-card="4"></div>
+        <div class="progress-dot" data-card="5"></div>
+    </div>
+    
+    <div class="cards-container">
+        <!-- Corporate Events Card -->
+        <div class="expertise-card active">
+            <div class="content">
+                <div class="heading">
+                    <div class="icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h2>Corporate Events</h2>
+                </div>
+                <div class="hr"></div>
+                <div class="body">
+                    <p class="body-text">From board meetings to global conferences, we orchestrate corporate events that align with your business objectives. Our strategic approach ensures every detail reinforces your brand message and engages your audience effectively.</p>
+                    <div class="body-link">
+                        <a href="#">
+                            View Portfolio
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Corporate event with people in a conference room" />
+            </div>
+        </div>
+        
+        <!-- Product Launches Card -->
+        <div class="expertise-card">
+            <div class="content">
+                <div class="heading">
+                    <div class="icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h2>Product Launches</h2>
+                </div>
+                <div class="hr"></div>
+                <div class="body">
+                    <p class="body-text">Make your product debut unforgettable. We create launch events that generate buzz, media coverage, and lasting impressions. From concept to execution, we ensure your product shines in the spotlight it deserves.</p>
+                    <div class="body-link">
+                        <a href="#">
+                            View Portfolio
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Product launch event with audience" />
+            </div>
+        </div>
+        
+        <!-- Award Ceremonies Card -->
+        <div class="expertise-card">
+            <div class="content">
+                <div class="heading">
+                    <div class="icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h2>Award Ceremonies</h2>
+                </div>
+                <div class="hr"></div>
+                <div class="body">
+                    <p class="body-text">Celebrate excellence with sophistication. Our award ceremonies blend prestige with innovation, creating memorable experiences for nominees and attendees alike. We handle everything from stage design to winner logistics.</p>
+                    <div class="body-link">
+                        <a href="#">
+                            View Portfolio
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Award ceremony with trophies on stage" />
+            </div>
+        </div>
+        
+        <!-- Weddings & Social Card -->
+        <div class="expertise-card">
+            <div class="content">
+                <div class="heading">
+                    <div class="icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h2>Weddings & Social</h2>
+                </div>
+                <div class="hr"></div>
+                <div class="body">
+                    <p class="body-text">Your special day deserves perfection. We craft weddings and social celebrations that reflect your personality and exceed your dreams. Every moment is meticulously planned to create memories that last a lifetime.</p>
+                    <div class="body-link">
+                        <a href="#">
+                            View Portfolio
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Beautiful wedding celebration" />
+            </div>
+        </div>
+        
+        <!-- MICE & Logistics Card -->
+        <div class="expertise-card">
+            <div class="content">
+                <div class="heading">
+                    <div class="icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h2>MICE & Logistics</h2>
+                </div>
+                <div class="hr"></div>
+                <div class="body">
+                    <p class="body-text">End-to-end travel and logistics management for multi-location events. From venue selection to accommodation, transportation to on-site coordination, we handle every detail across destinations worldwide.</p>
+                    <div class="body-link">
+                        <a href="#">
+                            View Portfolio
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="image">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Business meeting and logistics planning" />
+            </div>
+        </div>
+        
+        <!-- Spacer to ensure proper scrolling -->
+        <div class="spacer"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.expertise-card');
+            const progressDots = document.querySelectorAll('.progress-dot');
+            const cardCounter = document.querySelector('.card-counter');
+            
+            // Function to update active card
+            function updateActiveCard() {
+                const scrollPosition = window.scrollY;
+                const windowHeight = window.innerHeight;
+                
+                // Calculate which card should be active based on scroll position
+                let activeIndex = 0;
+                
+                // For each card, check if it's in the viewport
+                cards.forEach((card, index) => {
+                    const cardRect = card.getBoundingClientRect();
+                    
+                    // If the card is in the viewport, set it as active
+                    if (cardRect.top < windowHeight / 2 && cardRect.bottom > windowHeight / 2) {
+                        activeIndex = index;
+                    }
+                });
+                
+                // Update active classes
+                cards.forEach((card, index) => {
+                    if (index === activeIndex) {
+                        card.classList.add('active');
+                    } else {
+                        card.classList.remove('active');
+                    }
+                });
+                
+                // Update progress dots
+                progressDots.forEach((dot, index) => {
+                    if (index === activeIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+                
+                // Update card counter
+                cardCounter.textContent = `0${activeIndex + 1}`;
+            }
+            
+            // Set up scroll event listener
+            window.addEventListener('scroll', updateActiveCard);
+            
+            // Initial call to set active card
+            updateActiveCard();
+            
+            // Add click event to progress dots for navigation
+            progressDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const cardIndex = parseInt(this.getAttribute('data-card')) - 1;
+                    const card = cards[cardIndex];
+                    
+                    window.scrollTo({
+                        top: card.offsetTop,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

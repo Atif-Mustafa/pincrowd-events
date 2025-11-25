@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Pincrowd Events</title>
+  <meta name="description" content="Get in touch with Pincrowd Events. Contact Manish Soni at +91 9773776864 or manish@pincrowdevents.com. Visit our Mumbai office.">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <div class="page-transition"></div>
+  
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">PIN<span class="text-gold">CROWD</span> EVENTS</a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+      <button class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Contact Hero -->
+  <section class="hero" style="min-height: 60vh;">
+    <div class="container">
+      <h1 class="fade-in">Get in Touch</h1>
+      <p class="hero-subtitle fade-in">Let's create something extraordinary together</p>
+    </div>
+  </section>
+
+  <!-- Contact Info & Form -->
+  <section class="section">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+        <div class="fade-in">
+          <h2 style="color: var(--primary-green); margin-bottom: 2rem;">Contact Information</h2>
+          <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--accent-gold);">Manish Soni</h4>
+            <p style="margin-bottom: 0.5rem;"><strong>Founder & Director</strong></p>
+            <p style="margin-bottom: 0.5rem;">📱 <a href="tel:+919773776864">+91 9773776864</a></p>
+            <p style="margin-bottom: 0.5rem;">✉️ <a href="mailto:manish@pincrowdevents.com">manish@pincrowdevents.com</a></p>
+          </div>
+          <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--accent-gold);">Office Address</h4>
+            <p style="line-height: 1.6;">
+              31, 3rd Floor, Satyam Building<br>
+              Linking Road, Khar West<br>
+              Mumbai – 400052<br>
+              India
+            </p>
+          </div>
+          <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--accent-gold);">Follow Us</h4>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook">f</a>
+              <a href="#" aria-label="Instagram">i</a>
+              <a href="#" aria-label="LinkedIn">in</a>
+              <a href="#" aria-label="Twitter">t</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="fade-in">
+          <form class="contact-form" style="background: var(--gray-light); padding: 2rem; border-radius: 15px;">
+            <h3 style="color: var(--primary-green); margin-bottom: 1.5rem;">Send Us a Message</h3>
+            <div style="margin-bottom: 1rem;">
+              <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Full Name *</label>
+              <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-medium); border-radius: 8px; font-family: inherit;">
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email Address *</label>
+              <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-medium); border-radius: 8px; font-family: inherit;">
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <label for="phone" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Phone Number</label>
+              <input type="tel" id="phone" name="phone" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-medium); border-radius: 8px; font-family: inherit;">
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+              <label for="eventType" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Event Type</label>
+              <select id="eventType" name="eventType" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-medium); border-radius: 8px; font-family: inherit;">
+                <option value="">Select Event Type</option>
+                <option value="corporate">Corporate Event</option>
+                <option value="wedding">Wedding</option>
+                <option value="launch">Product Launch</option>
+                <option value="award">Award Ceremony</option>
+                <option value="MICE">MICE</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+              <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Message *</label>
+              <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--gray-medium); border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+            </div>
+            <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <h2 class="text-center fade-in">Find Our Office</h2>
+      <div class="fade-in" style="height: 400px; background: var(--gray-light); border-radius: 15px; overflow: hidden; margin-top: 2rem;">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.815925556961!2d72.829706315398!3d19.066424657155227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8f6c2a5d5e7%3A0x3b2f0f0c0a4f0c0a!2sKhar%20West%2C%20Mumbai%2C%20Maharashtra%20400052!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Find Us</h4>
+          <p>31, 3rd Floor, Satyam Building<br>
+          Linking Road, Khar West<br>
+          Mumbai – 400052<br>
+          <a href="https://maps.google.com" target="_blank">View on Map</a></p>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <p>Phone: <a href="tel:+919773776864">+91 9773776864</a><br>
+          Email: <a href="mailto:manish@pincrowdevents.com">manish@pincrowdevents.com</a></p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">i</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Twitter">t</a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Stay Up to Date</h4>
+          <p>Subscribe to our newsletter for event insights and inspiration.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email" required>
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Pincrowd Events. All rights reserved. | Where Every Event Is a Memory Worth Pinning.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

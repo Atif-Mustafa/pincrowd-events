@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initInteractiveAbout();
   initAchievements();
   initStories();
-  initExpertise();
+  // initExpertise();
   initWork();
   initNavigation();
   initModals();
@@ -182,35 +182,35 @@ function initStories() {
 }
 
 // Expertise Cards
-function initExpertise() {
-  const cards = document.querySelectorAll('.expertise-card');
+// function initExpertise() {
+//   const cards = document.querySelectorAll('.expertise-card');
 
-  cards.forEach((card, index) => {
-    ScrollTrigger.create({
-      trigger: card,
-      start: 'top 50%',
-      end: 'bottom 50%',
-      onEnter: () => {
-        gsap.to(card, { opacity: 1, duration: 0.5 });
-        gsap.from(card.querySelector('.content'), {
-          x: -50,
-          opacity: 0,
-          duration: 0.8,
-          delay: 0.2
-        });
-        gsap.from(card.querySelector('.image'), {
-          x: 50,
-          opacity: 0,
-          duration: 0.8,
-          delay: 0.2
-        });
-      },
-      onLeaveBack: () => {
-        gsap.to(card, { opacity: 0, duration: 0.5 });
-      }
-    });
-  });
-}
+//   cards.forEach((card, index) => {
+//     ScrollTrigger.create({
+//       trigger: card,
+//       start: 'top 50%',
+//       end: 'bottom 50%',
+//       onEnter: () => {
+//         gsap.to(card, { opacity: 1, duration: 0.5 });
+//         gsap.from(card.querySelector('.content'), {
+//           x: -50,
+//           opacity: 0,
+//           duration: 0.8,
+//           delay: 0.2
+//         });
+//         gsap.from(card.querySelector('.image'), {
+//           x: 50,
+//           opacity: 0,
+//           duration: 0.8,
+//           delay: 0.2
+//         });
+//       },
+//       onLeaveBack: () => {
+//         gsap.to(card, { opacity: 0, duration: 0.5 });
+//       }
+//     });
+//   });
+// }
 
 // Work Section
 function initWork() {

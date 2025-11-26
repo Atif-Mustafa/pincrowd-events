@@ -73,6 +73,48 @@ function initScrollAnimations() {
     );
   });
 }
+// hero section
+// Hero Video Handling
+function initHeroVideo() {
+  const hero = document.querySelector('.hero');
+  const video = document.getElementById('heroVideo');
+  const fallbackImage = document.querySelector('.fallback-image');
+
+  if (video) {
+    // Add loading state
+    hero.classList.add('loading');
+
+    // When video can play, remove loading state
+    video.addEventListener('canplay', () => {
+      hero.classList.remove('loading');
+      hero.classList.add('loaded');
+    });
+
+    // If video fails to load, show fallback image
+    video.addEventListener('error', () => {
+      hero.classList.remove('loading');
+      fallbackImage.style.display = 'block';
+      console.warn('Hero video failed to load, using fallback image');
+    });
+
+    // Attempt to play video (handles autoplay restrictions)
+    const playPromise = video.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // Autoplay was prevented, show fallback
+        console.warn('Autoplay prevented:', error);
+        fallbackImage.style.display = 'block';
+      });
+    }
+  }
+}
+
+// Add to your DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+  initHeroVideo();
+  // ... your other init functions
+});
 
 // Interactive About Section
 function initInteractiveAbout() {
@@ -444,87 +486,87 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
- document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.expertise-card');
-            const progressDots = document.querySelectorAll('.progress-dot');
-            const cardCounter = document.querySelector('.card-counter');
-            const cardsSection = document.querySelector('.cards-section');
-            
-            // Function to check if cards section is in view
-            function checkCardsSectionInView() {
-                const rect = cardsSection.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                
-                // Check if section is in viewport
-                const isInView = rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2;
-                
-                if (isInView) {
-                    cardsSection.classList.add('in-view');
-                } else {
-                    cardsSection.classList.remove('in-view');
-                }
-            }
-            
-            // Function to update active card
-            function updateActiveCard() {
-                const scrollPosition = window.scrollY;
-                const windowHeight = window.innerHeight;
-                
-                // Calculate which card should be active based on scroll position
-                let activeIndex = 0;
-                
-                // For each card, check if it's in the viewport
-                cards.forEach((card, index) => {
-                    const cardRect = card.getBoundingClientRect();
-                    
-                    // If the card is in the viewport, set it as active
-                    if (cardRect.top < windowHeight / 2 && cardRect.bottom > windowHeight / 2) {
-                        activeIndex = index;
-                    }
-                });
-                
-                // Update active classes
-                cards.forEach((card, index) => {
-                    if (index === activeIndex) {
-                        card.classList.add('active');
-                    } else {
-                        card.classList.remove('active');
-                    }
-                });
-                
-                // Update progress dots
-                progressDots.forEach((dot, index) => {
-                    if (index === activeIndex) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-                
-                // Update card counter
-                cardCounter.textContent = `0${activeIndex + 1}`;
-            }
-            
-            // Set up scroll event listeners
-            window.addEventListener('scroll', function() {
-                checkCardsSectionInView();
-                updateActiveCard();
-            });
-            
-            // Initial calls
-            checkCardsSectionInView();
-            updateActiveCard();
-            
-            // Add click event to progress dots for navigation
-            progressDots.forEach(dot => {
-                dot.addEventListener('click', function() {
-                    const cardIndex = parseInt(this.getAttribute('data-card')) - 1;
-                    const card = cards[cardIndex];
-                    
-                    window.scrollTo({
-                        top: card.offsetTop,
-                        behavior: 'smooth'
-                    });
-                });
-            });
-        });
+document.addEventListener('DOMContentLoaded', function () {
+  const cards = document.querySelectorAll('.expertise-card');
+  const progressDots = document.querySelectorAll('.progress-dot');
+  const cardCounter = document.querySelector('.card-counter');
+  const cardsSection = document.querySelector('.cards-section');
+
+  // Function to check if cards section is in view
+  function checkCardsSectionInView() {
+    const rect = cardsSection.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    // Check if section is in viewport
+    const isInView = rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2;
+
+    if (isInView) {
+      cardsSection.classList.add('in-view');
+    } else {
+      cardsSection.classList.remove('in-view');
+    }
+  }
+
+  // Function to update active card
+  function updateActiveCard() {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+
+    // Calculate which card should be active based on scroll position
+    let activeIndex = 0;
+
+    // For each card, check if it's in the viewport
+    cards.forEach((card, index) => {
+      const cardRect = card.getBoundingClientRect();
+
+      // If the card is in the viewport, set it as active
+      if (cardRect.top < windowHeight / 2 && cardRect.bottom > windowHeight / 2) {
+        activeIndex = index;
+      }
+    });
+
+    // Update active classes
+    cards.forEach((card, index) => {
+      if (index === activeIndex) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+
+    // Update progress dots
+    progressDots.forEach((dot, index) => {
+      if (index === activeIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+
+    // Update card counter
+    cardCounter.textContent = `0${activeIndex + 1}`;
+  }
+
+  // Set up scroll event listeners
+  window.addEventListener('scroll', function () {
+    checkCardsSectionInView();
+    updateActiveCard();
+  });
+
+  // Initial calls
+  checkCardsSectionInView();
+  updateActiveCard();
+
+  // Add click event to progress dots for navigation
+  progressDots.forEach(dot => {
+    dot.addEventListener('click', function () {
+      const cardIndex = parseInt(this.getAttribute('data-card')) - 1;
+      const card = cards[cardIndex];
+
+      window.scrollTo({
+        top: card.offsetTop,
+        behavior: 'smooth'
+      });
+    });
+  });
+});

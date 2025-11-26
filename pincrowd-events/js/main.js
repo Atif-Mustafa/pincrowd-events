@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initInteractiveAbout();
   initAchievements();
   initStories();
-  // initExpertise();
+  initExpert();
+  initExpertise();
   initWork();
   initNavigation();
   initModals();
@@ -117,66 +118,64 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Interactive About Section
-function initInteractiveAbout() {
-  const circleButtons = document.querySelectorAll('.circle-button');
-  const dynamicContent = document.querySelector('.dynamic-content');
+// function initInteractiveAbout() {
+//   const circleButtons = document.querySelectorAll('.circle-button');
+//   const dynamicContent = document.querySelector('.dynamic-content');
 
-  const contentData = {
-    why: {
-      title: 'Why We Do This',
-      text: 'We believe every event tells a story. Our passion lies in creating unforgettable moments that resonate long after the last guest leaves. We\'re driven by the joy of bringing people together and crafting experiences that matter.',
-      cta: 'Discover Our Why'
-    },
-    how: {
-      title: 'How We Create Magic',
-      text: 'Through meticulous planning, creative innovation, and flawless execution. We combine cutting-edge technology with time-tested event management expertise to deliver seamless experiences that exceed expectations.',
-      cta: 'Learn Our Process'
-    },
-    what: {
-      title: 'What We Deliver',
-      text: 'End-to-end event management solutions from concept to completion. Corporate events, product launches, award ceremonies, weddings, and everything in between. We handle every detail so you can enjoy the moment.',
-      cta: 'Explore Our Services'
-    }
-  };
+//   const contentData = {
+//     why: {
+//       title: 'Why We Do This',
+//       text: 'We believe every event tells a story. Our passion lies in creating unforgettable moments that resonate long after the last guest leaves. We\'re driven by the joy of bringing people together and crafting experiences that matter.',
+//       cta: 'Discover Our Why'
+//     },
+//     how: {
+//       title: 'How We Create Magic',
+//       text: 'Through meticulous planning, creative innovation, and flawless execution. We combine cutting-edge technology with time-tested event management expertise to deliver seamless experiences that exceed expectations.',
+//       cta: 'Learn Our Process'
+//     },
+//     what: {
+//       title: 'What We Deliver',
+//       text: 'End-to-end event management solutions from concept to completion. Corporate events, product launches, award ceremonies, weddings, and everything in between. We handle every detail so you can enjoy the moment.',
+//       cta: 'Explore Our Services'
+//     }
+//   };
 
-  function updateContent(key) {
-    const data = contentData[key];
-    const tl = gsap.timeline();
+//   function updateContent(key) {
+//     const data = contentData[key];
+//     const tl = gsap.timeline();
 
-    tl.to(dynamicContent, {
-      opacity: 0,
-      y: -20,
-      duration: 0.3,
-      ease: 'power2.in',
-      onComplete: () => {
-        dynamicContent.innerHTML = `
-          <h3>${data.title}</h3>
-          <p>${data.text}</p>
-          <a href="about.html" class="btn btn--gold">${data.cta}</a>
-        `;
-      }
-    })
-      .to(dynamicContent, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out'
-      });
-  }
+//     tl.to(dynamicContent, {
+//       opacity: 0,
+//       y: -20,
+//       duration: 0.3,
+//       ease: 'power2.in',
+//       onComplete: () => {
+//         dynamicContent.innerHTML = `
+//           <h3>${data.title}</h3>
+//           <p>${data.text}</p>
+//           <a href="about.html" class="btn btn--gold">${data.cta}</a>
+//         `;
+//       }
+//     })
+//       .to(dynamicContent, {
+//         opacity: 1,
+//         y: 0,
+//         duration: 0.5,
+//         ease: 'power2.out'
+//       });
+//   }
 
-  circleButtons.forEach(button => {
-    button.addEventListener('mouseenter', () => {
-      const key = button.dataset.content;
-      updateContent(key);
+//   circleButtons.forEach(button => {
+//     button.addEventListener('mouseenter', () => {
+//       const key = button.dataset.content;
+//       updateContent(key);
 
-      circleButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-    });
-  });
-
-  // Initialize with first content
-  circleButtons[0].classList.add('active');
-}
+//       circleButtons.forEach(btn => btn.classList.remove('active'));
+//       button.classList.add('active');
+//     });
+//   });
+//   circleButtons[0].classList.add('active');
+// }
 
 // Achievements Counter
 function initAchievements() {
@@ -253,6 +252,415 @@ function initStories() {
 //     });
 //   });
 // }
+function initExpert() {
+  const cards = document.querySelectorAll('.expo-card');
+
+  cards.forEach((card, index) => {
+    ScrollTrigger.create({
+      trigger: card,
+      start: 'top 50%',
+      end: 'bottom 50%',
+      onEnter: () => {
+        gsap.to(card, { opacity: 1, duration: 0.5 });
+
+        gsap.from(card.querySelector('.expo-content'), {
+          x: -50,
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.2
+        });
+
+        gsap.from(card.querySelector('.expo-image'), {
+          x: 50,
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.2
+        });
+      },
+      onLeaveBack: () => {
+        gsap.to(card, { opacity: 0, duration: 0.5 });
+      }
+    });
+  });
+}
+
+// BY ME
+function initExpertise() {
+  const cards = document.querySelectorAll('.expertise-card');
+  const progressDots = document.querySelectorAll('.progress-dot');
+  const cardCounter = document.querySelector('.card-counter');
+  const cardsSection = document.querySelector('.cards-section');
+
+  // Function to check if cards section is in view
+  function checkCardsSectionInView() {
+    const rect = cardsSection.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    // Check if section is in viewport
+    const isInView = rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2;
+
+    if (isInView) {
+      cardsSection.classList.add('in-view');
+    } else {
+      cardsSection.classList.remove('in-view');
+    }
+  }
+
+  // Function to update active card
+  function updateActiveCard() {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+
+    // Calculate which card should be active based on scroll position
+    let activeIndex = 0;
+
+    // For each card, check if it's in the viewport
+    cards.forEach((card, index) => {
+      const cardRect = card.getBoundingClientRect();
+
+      // If the card is in the viewport, set it as active
+      if (cardRect.top < windowHeight / 2 && cardRect.bottom > windowHeight / 2) {
+        activeIndex = index;
+      }
+    });
+
+    // Update active classes
+    cards.forEach((card, index) => {
+      if (index === activeIndex) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+
+    // Update progress dots
+    progressDots.forEach((dot, index) => {
+      if (index === activeIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+
+    // Update card counter
+    cardCounter.textContent = `0${activeIndex + 1}`;
+  }
+
+  // Set up scroll event listeners
+  window.addEventListener('scroll', function () {
+    checkCardsSectionInView();
+    updateActiveCard();
+  });
+
+  // Initial calls
+  checkCardsSectionInView();
+  updateActiveCard();
+
+  // Add click event to progress dots for navigation
+  // progressDots.forEach(dot => {
+  //   dot.addEventListener('click', function () {
+  //     const cardIndex = parseInt(this.getAttribute('data-card')) - 1;
+  //     const card = cards[cardIndex];
+
+  //     window.scrollTo({
+  //       top: card.offsetTop,
+  //       behavior: 'smooth'
+  //     });
+  //   });
+  // });
+}
+// 6:36
+// function initExpertise() {
+//   const cards = document.querySelectorAll('.expertise-card');
+//   const progressDots = document.querySelectorAll('.progress-dot');
+//   const cardCounter = document.querySelector('.card-counter');
+//   const cardsSection = document.querySelector('.cards-section');
+
+//   // Function to check if cards section is in view
+//   function checkCardsSectionInView() {
+//     const rect = cardsSection.getBoundingClientRect();
+//     const windowHeight = window.innerHeight;
+//     const isInView = rect.top <= windowHeight && rect.bottom >= 0;
+
+//     if (isInView) {
+//       cardsSection.classList.add('in-view');
+//     } else {
+//       cardsSection.classList.remove('in-view');
+//     }
+//   }
+
+//   // Improved function to update active card
+//   function updateActiveCard() {
+//     const windowHeight = window.innerHeight;
+//     let activeIndex = 0;
+//     let minDistance = Infinity;
+
+//     cards.forEach((card, index) => {
+//       const cardRect = card.getBoundingClientRect();
+//       const cardCenter = cardRect.top + cardRect.height / 2;
+//       const viewportCenter = windowHeight / 2;
+//       const distanceFromCenter = Math.abs(cardCenter - viewportCenter);
+
+//       // Find the card closest to the center of the viewport
+//       if (distanceFromCenter < minDistance) {
+//         minDistance = distanceFromCenter;
+//         activeIndex = index;
+//       }
+//     });
+
+//     // Update active classes
+//     cards.forEach((card, index) => {
+//       card.classList.toggle('active', index === activeIndex);
+//     });
+
+//     // Update progress dots
+//     progressDots.forEach((dot, index) => {
+//       dot.classList.toggle('active', index === activeIndex);
+//     });
+
+//     // Update card counter
+//     cardCounter.textContent = `0${activeIndex + 1}`;
+//   }
+
+//   // Throttle scroll events for better performance
+//   let scrollTimer;
+//   function throttledUpdate() {
+//     if (!scrollTimer) {
+//       scrollTimer = setTimeout(() => {
+//         checkCardsSectionInView();
+//         updateActiveCard();
+//         scrollTimer = null;
+//       }, 100);
+//     }
+//   }
+
+//   // Set up scroll event listeners
+//   window.addEventListener('scroll', throttledUpdate);
+
+//   // Add click event to progress dots for navigation
+//   progressDots.forEach(dot => {
+//     dot.addEventListener('click', function () {
+//       const cardIndex = parseInt(this.getAttribute('data-card')) - 1;
+//       const card = cards[cardIndex];
+      
+//       if (card) {
+//         const offsetTop = card.offsetTop - 100; // Offset for header
+//         window.scrollTo({
+//           top: offsetTop,
+//           behavior: 'smooth'
+//         });
+//       }
+//     });
+//   });
+
+//   // Initial calls
+//   checkCardsSectionInView();
+//   updateActiveCard();
+  
+//   // Also update on resize
+//   window.addEventListener('resize', updateActiveCard);
+// }
+// 6:47
+// function initExpertise() {
+//   const cards = document.querySelectorAll('.expertise-card');
+//   const progressDots = document.querySelectorAll('.progress-dot');
+//   const cardCounter = document.querySelector('.card-counter');
+//   const cardsSection = document.querySelector('.cards-section');
+
+//   // Function to check if cards section is in view
+//   function checkCardsSectionInView() {
+//     const rect = cardsSection.getBoundingClientRect();
+//     const windowHeight = window.innerHeight;
+//     const isInView = rect.top <= windowHeight && rect.bottom >= 0;
+
+//     if (isInView) {
+//       cardsSection.classList.add('in-view');
+//     } else {
+//       cardsSection.classList.remove('in-view');
+//     }
+//   }
+
+//   // Improved function to update active card
+//   function updateActiveCard() {
+//     const windowHeight = window.innerHeight;
+//     let activeIndex = 0;
+//     let minDistance = Infinity;
+
+//     cards.forEach((card, index) => {
+//       const cardRect = card.getBoundingClientRect();
+//       const cardCenter = cardRect.top + cardRect.height / 2;
+//       const viewportCenter = windowHeight / 2;
+//       const distanceFromCenter = Math.abs(cardCenter - viewportCenter);
+
+//       // Find the card closest to the center of the viewport
+//       if (distanceFromCenter < minDistance) {
+//         minDistance = distanceFromCenter;
+//         activeIndex = index;
+//       }
+//     });
+
+//     // Update active classes
+//     cards.forEach((card, index) => {
+//       card.classList.toggle('active', index === activeIndex);
+//     });
+
+//     // Update progress dots
+//     progressDots.forEach((dot, index) => {
+//       dot.classList.toggle('active', index === activeIndex);
+//     });
+
+//     // Update card counter
+//     cardCounter.textContent = `0${activeIndex + 1}`;
+//   }
+
+//   // Throttle scroll events for better performance
+//   let scrollTimer;
+//   function throttledUpdate() {
+//     if (!scrollTimer) {
+//       scrollTimer = setTimeout(() => {
+//         checkCardsSectionInView();
+//         updateActiveCard();
+//         scrollTimer = null;
+//       }, 100);
+//     }
+//   }
+
+//   // Set up scroll event listeners
+//   window.addEventListener('scroll', throttledUpdate);
+
+//   // FIXED: Progress dot click handler
+//   // progressDots.forEach(dot => {
+//   //   dot.addEventListener('click', function () {
+//   //     const cardIndex = parseInt(this.getAttribute('data-card')) - 1;
+//   //     const card = cards[cardIndex];
+      
+//   //     if (card) {
+//   //       // Get the position of the cards section
+//   //       const cardsSection = document.querySelector('.cards-section');
+//   //       const sectionTop = cardsSection.offsetTop;
+        
+//   //       // Calculate the scroll position relative to the cards section
+//   //       const cardOffsetInSection = card.offsetTop - sectionTop;
+        
+//   //       // Final scroll position: section top + card offset - header height
+//   //       const headerHeight = 80; // Adjust this based on your header height
+//   //       const scrollPosition = sectionTop + cardOffsetInSection - headerHeight;
+        
+//   //       window.scrollTo({
+//   //         top: scrollPosition,
+//   //         behavior: 'smooth'
+//   //       });
+//   //     }
+//   //   });
+//   // });
+//   function initExpertise() {
+//   const cards = document.querySelectorAll('.expertise-card');
+//   const progressDots = document.querySelectorAll('.progress-dot');
+//   const cardCounter = document.querySelector('.card-counter');
+//   const cardsSection = document.querySelector('.cards-section');
+
+//   // Function to check if cards section is in view
+//   function checkCardsSectionInView() {
+//     const rect = cardsSection.getBoundingClientRect();
+//     const windowHeight = window.innerHeight;
+//     const isInView = rect.top <= windowHeight && rect.bottom >= 0;
+
+//     if (isInView) {
+//       cardsSection.classList.add('in-view');
+//     } else {
+//       cardsSection.classList.remove('in-view');
+//     }
+//   }
+
+//   // Improved function to update active card
+//   function updateActiveCard() {
+//     const windowHeight = window.innerHeight;
+//     let activeIndex = 0;
+//     let minDistance = Infinity;
+
+//     cards.forEach((card, index) => {
+//       const cardRect = card.getBoundingClientRect();
+//       const cardCenter = cardRect.top + cardRect.height / 2;
+//       const viewportCenter = windowHeight / 2;
+//       const distanceFromCenter = Math.abs(cardCenter - viewportCenter);
+
+//       // Find the card closest to the center of the viewport
+//       if (distanceFromCenter < minDistance) {
+//         minDistance = distanceFromCenter;
+//         activeIndex = index;
+//       }
+//     });
+
+//     // Update active classes
+//     cards.forEach((card, index) => {
+//       card.classList.toggle('active', index === activeIndex);
+//     });
+
+//     // Update progress dots
+//     progressDots.forEach((dot, index) => {
+//       dot.classList.toggle('active', index === activeIndex);
+//     });
+
+//     // Update card counter
+//     cardCounter.textContent = `0${activeIndex + 1}`;
+//   }
+
+//   // Throttle scroll events for better performance
+//   let scrollTimer;
+//   function throttledUpdate() {
+//     if (!scrollTimer) {
+//       scrollTimer = setTimeout(() => {
+//         checkCardsSectionInView();
+//         updateActiveCard();
+//         scrollTimer = null;
+//       }, 100);
+//     }
+//   }
+
+//   // Set up scroll event listeners
+//   window.addEventListener('scroll', throttledUpdate);
+
+//   // FIXED: Progress dot click handler
+//   progressDots.forEach(dot => {
+//     dot.addEventListener('click', function () {
+//       const cardIndex = parseInt(this.getAttribute('data-card')) - 1;
+//       const card = cards[cardIndex];
+      
+//       if (card) {
+//         // Get the position of the cards section
+//         const cardsSection = document.querySelector('.cards-section');
+//         const sectionTop = cardsSection.offsetTop;
+        
+//         // Calculate the scroll position relative to the cards section
+//         const cardOffsetInSection = card.offsetTop - sectionTop;
+        
+//         // Final scroll position: section top + card offset - header height
+//         const headerHeight = 80; // Adjust this based on your header height
+//         const scrollPosition = sectionTop + cardOffsetInSection - headerHeight;
+        
+//         window.scrollTo({
+//           top: scrollPosition,
+//           behavior: 'smooth'
+//         });
+//       }
+//     });
+//   });
+
+//   // Initial calls
+//   checkCardsSectionInView();
+//   updateActiveCard();
+  
+//   // Also update on resize
+//   window.addEventListener('resize', updateActiveCard);
+// }
+
+//   // Initial calls
+//   checkCardsSectionInView();
+//   updateActiveCard();
+  
+//   // Also update on resize
+//   window.addEventListener('resize', updateActiveCard);
+// }
 
 // Work Section
 function initWork() {
@@ -285,11 +693,16 @@ function initWork() {
 
 // Modals
 function initModals() {
+  console.log("initModals");
   const modalTriggers = document.querySelectorAll('[data-modal]');
   const modals = document.querySelectorAll('.modal');
+  console.log(modalTriggers);
+  console.log(modals);
 
   modalTriggers.forEach(trigger => {
+    console.log("trigger")
     trigger.addEventListener('click', (e) => {
+      console.log("trigger eventlisterner")
       e.preventDefault();
       const modalId = trigger.dataset.modal;
       const modal = document.getElementById(modalId);
@@ -411,7 +824,7 @@ document.addEventListener('DOMContentLoaded', initPageTransitions);
 // ****************By ME**********
 
 // Interactive About Section
-document.addEventListener('DOMContentLoaded', function () {
+function initInteractiveAbout() {
   const circles = document.querySelectorAll('.circle');
   const sectionContent = document.querySelector('.section-content');
   const contentSections = {
@@ -485,88 +898,5 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-});
-document.addEventListener('DOMContentLoaded', function () {
-  const cards = document.querySelectorAll('.expertise-card');
-  const progressDots = document.querySelectorAll('.progress-dot');
-  const cardCounter = document.querySelector('.card-counter');
-  const cardsSection = document.querySelector('.cards-section');
+}
 
-  // Function to check if cards section is in view
-  function checkCardsSectionInView() {
-    const rect = cardsSection.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-
-    // Check if section is in viewport
-    const isInView = rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2;
-
-    if (isInView) {
-      cardsSection.classList.add('in-view');
-    } else {
-      cardsSection.classList.remove('in-view');
-    }
-  }
-
-  // Function to update active card
-  function updateActiveCard() {
-    const scrollPosition = window.scrollY;
-    const windowHeight = window.innerHeight;
-
-    // Calculate which card should be active based on scroll position
-    let activeIndex = 0;
-
-    // For each card, check if it's in the viewport
-    cards.forEach((card, index) => {
-      const cardRect = card.getBoundingClientRect();
-
-      // If the card is in the viewport, set it as active
-      if (cardRect.top < windowHeight / 2 && cardRect.bottom > windowHeight / 2) {
-        activeIndex = index;
-      }
-    });
-
-    // Update active classes
-    cards.forEach((card, index) => {
-      if (index === activeIndex) {
-        card.classList.add('active');
-      } else {
-        card.classList.remove('active');
-      }
-    });
-
-    // Update progress dots
-    progressDots.forEach((dot, index) => {
-      if (index === activeIndex) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
-      }
-    });
-
-    // Update card counter
-    cardCounter.textContent = `0${activeIndex + 1}`;
-  }
-
-  // Set up scroll event listeners
-  window.addEventListener('scroll', function () {
-    checkCardsSectionInView();
-    updateActiveCard();
-  });
-
-  // Initial calls
-  checkCardsSectionInView();
-  updateActiveCard();
-
-  // Add click event to progress dots for navigation
-  progressDots.forEach(dot => {
-    dot.addEventListener('click', function () {
-      const cardIndex = parseInt(this.getAttribute('data-card')) - 1;
-      const card = cards[cardIndex];
-
-      window.scrollTo({
-        top: card.offsetTop,
-        behavior: 'smooth'
-      });
-    });
-  });
-});

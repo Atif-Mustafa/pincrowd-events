@@ -10,6 +10,8 @@
   --accent-gold: #D4AF37;
   --text-dark: #1a1a1a;
   --text-light: #f5f5f5;
+  --text-gray: #cac4c4;
+  --text-grayDark: #5b5959;
   --white: #ffffff;
   --gray-light: #f8f9fa;
   --gray-medium: #e9ecef;
@@ -372,7 +374,8 @@ p {
   position: relative;
   overflow: hidden;
   color: #ffffff;
-  background: var(--primary-green); /* Fallback color */
+  background: var(--primary-green);
+  /* Fallback color */
 }
 
 .video-background {
@@ -459,12 +462,19 @@ p {
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateX(-50%) translateY(0);
   }
+
   40% {
     transform: translateX(-50%) translateY(-10px);
   }
+
   60% {
     transform: translateX(-50%) translateY(-5px);
   }
@@ -486,21 +496,21 @@ p {
     min-height: 100vh;
     padding: 2rem 0;
   }
-  
+
   .hero-video {
     /* On mobile, you might want to use a smaller video or image */
   }
-  
+
   /* Reduce motion for users who prefer it */
   @media (prefers-reduced-motion: reduce) {
     .hero-video {
       display: none;
     }
-    
+
     .fallback-image {
       display: block;
     }
-    
+
     .scroll-indicator {
       animation: none;
     }
@@ -762,6 +772,82 @@ p {
   height: 100%;
   object-fit: cover;
 } */
+.expo-section {
+  background: var(--white);
+  padding: 8rem 0;
+}
+
+.expo-container {
+  width: 90%;
+  margin: auto;
+}
+
+.expo-title {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.expo-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 6rem;
+  opacity: 0;
+}
+
+/* Reverse layout for alternate rows */
+.expo-card:nth-child(even) {
+  direction: rtl;
+}
+
+@media (max-width: 768px) {
+  .expo-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .expo-card:nth-child(even) {
+    direction: ltr;
+  }
+}
+
+.expo-content {
+  padding: 2rem;
+}
+
+.expo-content h3 {
+  color: var(--primary-green);
+  margin-bottom: 1.5rem;
+}
+
+.expo-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.expo-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  background: var(--primary-green);
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.expo-image {
+  position: relative;
+  height: 400px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.expo-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /* Work Section */
 .work-section {
@@ -876,7 +962,7 @@ p {
   overflow-y: auto;
   position: relative;
   transform: scale(0.9);
-  opacity: 0;
+  opacity: 1;
   transition: var(--transition);
 }
 
@@ -914,12 +1000,16 @@ p {
 }
 
 .modal-body h3 {
-  color: var(--primary-green);
+  color: var(--white);
   margin-bottom: 1rem;
 }
+.modal-body p strong{
+  color: var(--text-grayDark);
 
+}
 .modal-body p {
   margin-bottom: 1rem;
+  color: var(--text-gray)
 }
 
 /* Footer */
@@ -1138,7 +1228,7 @@ p {
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 30px;
-  color: #555;
+  color: #fff;
   transition: all 0.3s ease;
 }
 
@@ -1160,9 +1250,9 @@ p {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
   background: #C19D2E;
-} */
+}
 
-.content-right {
+*/ .content-right {
   position: relative;
 }
 
@@ -1371,110 +1461,110 @@ p {
 }
 
 /* Cards section wrapper */
-        .cards-section {
-            position: relative;
-            min-height: 100vh;
-        }
-        
-        .cards-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-            padding: 60px 20px;
-            position: relative;
-        }
-        
-        /* Progress indicators - contained within cards section */
-        .cards-progress {
-            
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .cards-section.in-view .cards-progress {
-            opacity: 1;
-        }
-        
-        .card-counter {
-            position: fixed;
-            left: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
-            color: #333;
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 12px 24px;
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .cards-section.in-view .card-counter {
-            opacity: 1;
-        }
-        
-        .progress-dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-            position: relative;
-        }
-        
-        .progress-dot::after {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 208, 141, 0.5);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .progress-dot.active {
-            background-color: #2a4a27;
-            transform: scale(1.3);
-        }
-        
-        .progress-dot.active::after {
-            opacity: 1;
-        }
-        
-        .expertise-card {
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            height: 480px;
-            overflow: hidden;
-            position: sticky;
-            width: 90%;
-            max-width: 1200px;
-            display: flex;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            background: white;
-        }
-        
-        /* Higher z-index for later cards so they appear on top when scrolling */
-        .expertise-card:nth-child(1) {
+.cards-section {
+  position: relative;
+  min-height: 100vh;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 20px;
+  position: relative;
+}
+
+/* Progress indicators - contained within cards section */
+.cards-progress {
+
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cards-section.in-view .cards-progress {
+  opacity: 1;
+}
+
+.card-counter {
+  position: fixed;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 12px 24px;
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cards-section.in-view .card-counter {
+  opacity: 1;
+}
+
+.progress-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.progress-dot::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 208, 141, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.progress-dot.active {
+  background-color: #2a4a27;
+  transform: scale(1.3);
+}
+
+.progress-dot.active::after {
+  opacity: 1;
+}
+
+.expertise-card {
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  height: 480px;
+  overflow: hidden;
+  position: sticky;
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: white;
+}
+
+/* Higher z-index for later cards so they appear on top when scrolling */
+/* .expertise-card:nth-child(1) {
             top: 80px;
             z-index: 1;
         }
@@ -1497,199 +1587,336 @@ p {
         .expertise-card:nth-child(5) {
             top: 160px;
             z-index: 5;
-        }
-        
-        .expertise-card.active {
-            transform: scale(1.02);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            border-color: rgba(255, 208, 141, 0.3);
-        }
-        
-        .content {
-            background: linear-gradient(135deg, #2a4a27 0%, #182916 100%);
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 24px;
-            width: 60%;
-            padding: 50px;
-            display: flex;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://www.transparenttextures.com/patterns/diagmonds.png');
-            opacity: 0.1;
-            z-index: 0;
-        }
-        
-        .content > * {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .heading {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 208, 141, 0.2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffd08d;
-            font-size: 1.5rem;
-        }
-        
-        .heading h2 {
-            color: #fff;
-            font-size: 2.4rem;
-            margin-bottom: 0;
-            font-weight: 700;
-        }
-        
-        .hr {
-            background: linear-gradient(to right, #ffd08d, transparent);
-            width: 100%;
-            height: 3px;
-            border-radius: 2px;
-        }
-        
-        .body {
-            color: #f0f0f0;
-            line-height: 1.7;
-        }
-        
-        .body-text {
-            margin-bottom: 30px;
-            font-size: 1.2rem;
-            max-width: 500px;
-            font-weight: 300;
-        }
-        
-        .image {
-            width: 40%;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to left, rgba(0,0,0,0.2), transparent);
-            z-index: 1;
-        }
-        
-        .image img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-position: center;
-            object-fit: cover;
-            transition: transform 1.2s ease;
-        }
-        
-        .expertise-card.active .image img {
-            transform: scale(1.08);
-        }
-        
-        .body-link {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: .5rem;
-            margin-top: 1rem;
-        }
-        
-        .body-link a {
-            display: flex;
-            gap: .8rem;
-            color: #ffd08d;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            padding: 14px 28px;
-            border: 2px solid #ffd08d;
-            border-radius: 50px;
-            background: rgba(255, 208, 141, 0.1);
-            align-items: center;
-        }
-        
-        .body-link a:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 208, 141, 0.2);
-            box-shadow: 0 5px 15px rgba(255, 208, 141, 0.2);
-        }
-        
-        .spacer {
-            height: 100px;
-        }
-        
-        @media (max-width: 900px) {
-            .cards-container {
-                padding: 40px 20px;
-                gap: 30px;
-            }
-            
-            .expertise-card {
-                flex-direction: column;
-                position: relative;
-                top: 0 !important;
-                height: auto;
-                min-height: auto;
-                width: 95%;
-            }
-            
-            .content, .image {
-                width: 100%;
-            }
-            
-            .image {
-                height: 300px;
-                order: -1;
-            }
-            
-            .content {
-                padding: 40px 30px;
-            }
-            
-            .cards-progress, .card-counter {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .content {
-                padding: 30px 20px;
-            }
-            
-            .heading h2 {
-                font-size: 2rem;
-            }
-            
-            .body-text {
-                font-size: 1rem;
-            }
-            
-            .icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-        }
+        } */
+/* Fix for expertise card selectors */
+.cards-container>.expertise-card:nth-of-type(1) {
+  /* First card */
+  /* Your styles for first card */
+  top: 130px;
+  z-index: 1;
+}
+
+.cards-container>.expertise-card:nth-of-type(2) {
+  /* Second card */
+  /* Your styles for second card */
+  top: 150px;
+  z-index: 2;
+}
+
+.cards-container>.expertise-card:nth-of-type(3) {
+  /* Third card */
+  /* Your styles for third card */
+  top: 170px;
+  z-index: 3;
+}
+
+.cards-container>.expertise-card:nth-of-type(4) {
+  /* Fourth card */
+  /* Your styles for fourth card */
+  top: 190px;
+  z-index: 4;
+}
+
+.cards-container>.expertise-card:nth-of-type(5) {
+  /* Fifth card */
+  /* Your styles for fifth card */
+  top: 210px;
+  z-index: 5;
+}
+
+.expertise-card.active {
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 208, 141, 0.3);
+}
+
+.content {
+  background: linear-gradient(135deg, #2a4a27 0%, #182916 100%);
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  width: 60%;
+  padding: 50px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('https://www.transparenttextures.com/patterns/diagmonds.png');
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.content>* {
+  position: relative;
+  z-index: 1;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 208, 141, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffd08d;
+  font-size: 1.5rem;
+}
+
+.heading h2 {
+  color: #fff;
+  font-size: 2.4rem;
+  margin-bottom: 0;
+  font-weight: 700;
+}
+
+.hr {
+  background: linear-gradient(to right, #ffd08d, transparent);
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.body {
+  color: #f0f0f0;
+  line-height: 1.7;
+}
+
+.body-text {
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+  max-width: 500px;
+  font-weight: 300;
+}
+
+.image {
+  width: 40%;
+  position: relative;
+  overflow: hidden;
+}
+
+.image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.2), transparent);
+  z-index: 1;
+}
+
+.image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+  transition: transform 1.2s ease;
+}
+
+.expertise-card.active .image img {
+  transform: scale(1.08);
+}
+
+.body-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+
+.body-link a {
+  display: flex;
+  gap: .8rem;
+  color: #ffd08d;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 14px 28px;
+  border: 2px solid #ffd08d;
+  border-radius: 50px;
+  background: rgba(255, 208, 141, 0.1);
+  align-items: center;
+}
+
+.body-link a:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 208, 141, 0.2);
+  box-shadow: 0 5px 15px rgba(255, 208, 141, 0.2);
+}
+
+.spacer {
+  height: 100px;
+}
+
+@media (max-width: 900px) {
+  .cards-container {
+    padding: 40px 20px;
+    gap: 30px;
+  }
+
+  .expertise-card {
+    flex-direction: column;
+    position: relative;
+    top: 0 !important;
+    height: auto;
+    min-height: auto;
+    width: 95%;
+  }
+
+  .content,
+  .image {
+    width: 100%;
+  }
+
+  .image {
+    height: 300px;
+    order: -1;
+  }
+
+  .content {
+    padding: 40px 30px;
+  }
+
+  .cards-progress,
+  .card-counter {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .content {
+    padding: 30px 20px;
+  }
+
+  .heading h2 {
+    font-size: 2rem;
+  }
+
+  .body-text {
+    font-size: 1rem;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Contact Form */
+#contact {
+  padding: 50px 0;
+  /* margin-bottom: 5rem; */
+  background: linear-gradient(135deg, #2a4a27 0%, #182916 100%);
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+#contact .contact-container {
+  width: 90%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 30px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#contact .contact-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+/* Form Layout */
+#contact .contact-container .contact-form {
+  width: 100%;
+}
+
+/* Two inputs per row */
+#contact .contact-container .contact-form .form-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Keep inputs inside the box */
+.form-row .form-group {
+  width: 100%;
+}
+
+.full-width {
+  margin-bottom: 20px;
+}
+
+/* Input + Textarea styles */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;
+}
+.form-group input::placeholder, .form-group textarea::placeholder{
+
+  color: var(--text-gray);       
+  /* font-size: 14px;    */
+
+
+}
+
+.form-group textarea {
+  height: 120px;
+  resize: none;
+}
+
+#contact .contact-container .contact-form button {
+  width: 100%;
+  padding: 14px;
+  background: #4f8051;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#contact .contact-container .contact-form button:hover {
+  background: #3b633d;
+}
+
+/* Responsive fix */
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
